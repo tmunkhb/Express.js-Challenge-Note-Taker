@@ -1,8 +1,10 @@
+// Dependencies
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
-const PORT = process.env.PORT || 3001;
 const { notes } = require('./db/db.json');
+// Server setup
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 // parse incoming string or array data
@@ -12,7 +14,16 @@ app.use(express.json());
 // middleware for static resources using "static" method
 app.use(express.static('public'));
 
-
+// function for creating new notes
+GenerateNewNote = (body, notesArray) => {
+    const note = body;
+    notesArray.push(note);
+    fs.writeFileSync(
+        path.join(__dirname, '../db/db.json'),
+        JSON.stringify({note}, null, 2)
+    );
+    return note;
+}
 
 
 
