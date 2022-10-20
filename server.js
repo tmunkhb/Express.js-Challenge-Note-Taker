@@ -25,7 +25,18 @@ GenerateNewNote = (body, noteArray) => {
     return newNote;
 };
 
-
+// function for deleting existing notes
+deleteExistingNote = (noteArray, id) => {
+    for (let i = 0; i < noteArray.length; i++) {
+        let noteDelete = noteArray[i];
+        if (noteDelete.id == id) {
+            noteArray.splice(i, 1);
+            fs.writeFileSync(
+                path.join(__dirname, './db/db.json'),
+                JSON.stringify(noteArray, null, 2)
+        )}
+    }   
+};
 
 // API routes
 app.get("/api/notes", (req, res) => {
@@ -38,7 +49,11 @@ app.post("/api/notes", (req, res) => {
     res.json(note);
 })
 
-
+// API route for delete function
+app.delete("/api/notes/:id", (req, res) => {
+    deleteExistingNote(notes, req.params.id);
+    res.json(notes);
+})
 
 // html routes
 app.get("/notes", (req, res) => {
