@@ -1,4 +1,4 @@
-# Note Taker Starter Code
+# Note Taker
 ## Description
 Purpose of this application is to simply write and save notes. It uses express.js as a back end and retrieves note data from a JSON file. Main challenge of this app was to connect a starter front end code by building back end and deploying it to Heroku.
 
